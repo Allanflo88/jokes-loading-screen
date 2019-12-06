@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <p class="container__joke" v-bind:class="{active: joke}">{{joke.setup || ""}}</p>
-        <p class="container__joke" v-bind:class="{active: joke}">{{joke.punchline || ""}}</p>
+    <div class="container" v-if="jokeBeingShowed">
+        <p class="joke" v-if="!showPunchline">{{jokeBeingShowed.setup || ""}}</p>
+        <p class="joke" v-if="showPunchline">{{jokeBeingShowed.punchline || ""}}</p>
     </div>
 
 </template>
@@ -13,23 +13,41 @@ export default {
     name: 'joke',
     data() {
         return {
-            joke: null
+            jokes: [],
+            jokeBeingShowed: null,
+            showPunchline: false
         }
     },
     mounted() {
-        Jokes.getJoke().then(response => {
-            response.json().then(json => {
-                this.joke = json;
-            });
-        });
+        this.getJokes();
+        setInterval(this.showJoke, 5000);
     },
     methods: {
+        getJokes() {
+            Jokes.getTenJokes().then(response => {
+                response.json().then(json => {
+                    this.jokes = this.jokes.length ? [...this.jokes,...json] : json;
+                });
+            });
+        },
+        showJoke() {
+            if(this.jokes.length){
+                this.showPunchline = false;
+                this.jokeBeingShowed = this.jokes.pop();
+                setTimeout(()=> {
+                    this.showPunchline = true;
+                }, 2500);
+            }
+            if(this.jokes.length <= 1){
+                this.getJokes();
+            }
+        }
     }
 }
 </script>
 
 <style>
-    .container__joke {
+    .joke {
         min-height: 20px;
         width: 100%;
     }
