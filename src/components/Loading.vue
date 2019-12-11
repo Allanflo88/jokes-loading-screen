@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     @keyframes grow {
         0% { 
             transform: scale(0);
@@ -25,7 +25,7 @@ export default {
         }
     }
     .loading {
-        height: 40px;
+        max-height: 40px;
     }
     .square {
         position: relative;
