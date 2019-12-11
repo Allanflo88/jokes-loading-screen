@@ -1,7 +1,9 @@
 <template>
-    <div class="container" v-if="jokeBeingShowed">
-        <p class="joke" v-if="!showPunchline">{{jokeBeingShowed.setup || ""}}</p>
-        <p class="joke" v-if="showPunchline">{{jokeBeingShowed.punchline || ""}}</p>
+    <div class="container">
+        <transition appear name="fade" mode="out-in" v-if="jokeBeingShowed">
+            <p class="joke" v-if="!showPunchline" key="setup">{{jokeBeingShowed.setup || ""}}</p>
+            <p class="joke" v-else key="punchline">{{jokeBeingShowed.punchline || ""}}</p>
+        </transition>
     </div>
 
 </template>
@@ -47,8 +49,16 @@ export default {
 </script>
 
 <style>
+    .container {
+        min-height: 50px;
+    }
     .joke {
-        min-height: 20px;
         width: 100%;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to{
+        opacity: 0;
     }
 </style>
