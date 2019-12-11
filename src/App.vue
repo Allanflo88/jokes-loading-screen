@@ -39,4 +39,7 @@ export default {
     padding: 10px;
     box-sizing:border-box
   }
+  [v-cloak] {
+    display: none;
+  }
 </style>

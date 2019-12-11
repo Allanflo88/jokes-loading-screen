@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <transition appear name="fade" mode="out-in" v-if="jokeBeingShowed">
+        <transition appear name="fade" mode="out-in" v-cloak>
             <p class="joke" v-if="!showPunchline" key="setup">{{jokeBeingShowed.setup || ""}}</p>
             <p class="joke" v-else key="punchline">{{jokeBeingShowed.punchline || ""}}</p>
         </transition>
