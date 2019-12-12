@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <transition appear name="fade" mode="out-in" v-cloak>
+        <transition appear name="fade" mode="out-in" v-if="jokeBeingShowed">
             <p class="joke" v-if="!showPunchline" key="setup">{{jokeBeingShowed.setup || ""}}</p>
             <p class="joke" v-else key="punchline">{{jokeBeingShowed.punchline || ""}}</p>
         </transition>
@@ -49,16 +49,13 @@ export default {
 </script>
 
 <style scoped>
+    @import "../assets/styles/_variables.css";
+    @import "../assets/styles/_animations.css";
+
     .container {
         min-height: 50px;
     }
     .joke {
         width: 100%;
-    }
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to{
-        opacity: 0;
     }
 </style>

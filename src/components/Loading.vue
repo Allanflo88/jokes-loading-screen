@@ -13,17 +13,9 @@ export default {
 </script>
 
 <style scoped>
-    @keyframes grow {
-        0% { 
-            transform: scale(0);
-        }
-        50% {
-            transform: scale(.4);
-        }
-        100% { 
-            transform: scale(0);
-        }
-    }
+    @import "../assets/styles/_variables.css";
+    @import "../assets/styles/_animations.css";
+    
     .loading {
         max-height: 40px;
     }
@@ -32,7 +24,7 @@ export default {
         display: inline-block;
         width: 40px;
         height: 40px;
-        background-color: white;
+        background-color: var(--white);
         animation: grow 1.2s ease-in-out infinite;
     }
     .square:nth-child(2) {
